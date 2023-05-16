@@ -1,10 +1,12 @@
-class Intro extends Phaser.scene {
+class Intro extends Phaser.Scene {
     constructor() {
         super('intro')
     }
 
     create() {
-        this.add.text(50,50, "Test your skill in this mini platforming test!").setFontSize(50);
+        this.cameras.main.setBackgroundColor(0x000000)
+        this.add.text(50,50, "Test your skill in this \
+        \nmini platforming test!").setFontSize(25);
         this.add.text(50,100, "Click anywhere to begin.").setFontSize(20);
         this.input.on('pointerdown', () => {
             this.cameras.main.fade(1000, 0,0,0);
@@ -13,7 +15,7 @@ class Intro extends Phaser.scene {
     }
 }
 
-class Level1 extends Phaser.scene {
+class Level1 extends Phaser.Scene {
     constructor() {
         super('level1')
     }
@@ -21,6 +23,7 @@ class Level1 extends Phaser.scene {
     preload() {
         this.load.image('dave', 'assets/dave.png')
         // load tile map
+        this.load.image('arrowKey', 'assets/arrow-key.png')
     }
 
     create() {
@@ -28,57 +31,35 @@ class Level1 extends Phaser.scene {
         // add tile map
         this.physics.world.gravity.y = 1000
 
-        this.ground = this.add.group();
-        for(let i = 0; i < game.config.width; i += tileSize) {
-            let groundTile = this.physics.add.sprite(i, game.config.height - tileSize, 'platformer_atlas', 'block').setScale(SCALE).setOrigin(0);
-            groundTile.body.immovable = true;
-            groundTile.body.allowGravity = false;
-            this.ground.add(groundTile);
-        }
-        for(let i = tileSize*7; i < game.config.width-tileSize*4; i += tileSize) {
-            let groundTile = this.physics.add.sprite(i, game.config.height - tileSize*5, 'platformer_atlas', 'block').setScale(SCALE).setOrigin(0);
-            groundTile.body.immovable = true;
-            groundTile.body.allowGravity = false;
-            this.ground.add(groundTile);
-        }
-        for(let i = tileSize*2; i < game.config.width-tileSize*13; i += tileSize) {
-            let groundTile = this.physics.add.sprite(i, game.config.height - tileSize*9, 'platformer_atlas', 'block').setScale(SCALE).setOrigin(0);
-            groundTile.body.immovable = true;
-            groundTile.body.allowGravity = false;
-            this.ground.add(groundTile);
-        }
 
-        this.dave = this.physics.add.sprite(game.config.width/2, game.config.height/2, 'dave').setScale(0.5)
+        this.dave = this.physics.add.sprite(game.config.width/2, game.config.height/2, 'dave').setScale(0.25)
         this.dave.setCollideWorldBounds(true)
         this.dave.setMaxVelocity(300, 3000)
 
-
         cursors = this.input.keyboard.createCursorKeys()
 
-        this.physics.add.collider(this.dave, this.ground)
+        // this.physics.add.collider(this.dave, this.ground)
 
         // arrow keys ui
-        this.upKey = this.add.sprite(64, 32, 'arrowKey');
-		this.leftKey = this.add.sprite(32, 64, 'arrowKey');
-		this.downKey = this.add.sprite(64, 64, 'arrowKey');
-		this.rightKey = this.add.sprite(96, 64, 'arrowKey');
-		this.leftKey.rotation = Math.PI/2*3;
-		this.downKey.rotation = Math.PI;
-        this.rightKey.rotation = Math.PI/2;
+        this.upKey = this.add.sprite(64, 32, 'arrowKey').setScale(0.05);
+		this.leftKey = this.add.sprite(32, 64, 'arrowKey').setScale(0.05);
+		this.downKey = this.add.sprite(64, 64, 'arrowKey').setScale(0.05);
+		this.rightKey = this.add.sprite(96, 64, 'arrowKey').setScale(0.05);
+		this.downKey.rotation = Math.PI/2*3;
+		this.rightKey.rotation = Math.PI;
+        this.upKey.rotation = Math.PI/2;
         this.downKey.tint = 0x333333;
     }
 
     update() {
         if (cursors.left.isDown) {
             this.dave.setVelocityX(-300)
-            this.dave.setFlip(true, false)
-            this.leftKey.tint = 0xFACADE
+            this.leftKey.tint = 0x000000
         }
 
         else if (cursors.right.isDown) {
             this.dave.setVelocityX(300)
-            this.alien.resetFlip()
-            this.rightKey.tint = 0xFACADE
+            this.rightKey.tint = 0x000000
         }
 
         else {
@@ -89,7 +70,7 @@ class Level1 extends Phaser.scene {
         
         if (this.dave.body.touching.down && Phaser.Input.Keyboard.JustDown(cursors.up)) {
             this.dave.body.setVelocityY(-1000)
-            this.upKey.tint = 0xFACADE
+            this.upKey.tint = 0x000000
         }
 
         else {
@@ -100,7 +81,7 @@ class Level1 extends Phaser.scene {
     }
 }
 
-class Level2 extends Phaser.scene {
+class Level2 extends Phaser.Scene {
     constructor() {
         super('level2')
     }
@@ -115,7 +96,7 @@ class Level2 extends Phaser.scene {
     }
 }
 
-class Level3 extends Phaser.scene {
+class Level3 extends Phaser.Scene {
     constructor() {
         super('level3')
     }
@@ -130,7 +111,7 @@ class Level3 extends Phaser.scene {
     }
 }
 
-class Summary extends Phaser.scene {
+class Summary extends Phaser.Scene {
     constructor() {
         super('summary')
     }
@@ -140,7 +121,7 @@ class Summary extends Phaser.scene {
     }
 }
 
-class Credits extends Phaser.scene {
+class Credits extends Phaser.Scene {
     constructor() {
         super('credits');
     }
@@ -152,14 +133,23 @@ class Credits extends Phaser.scene {
     }
 }
 
-const game = new Phaser.Game({
-    scale: {
-        mode: Phaser.Scale.FIT,
-        autoCenter: Phaser.Scale.CENTER_BOTH,
-        width: 1920,
-        height: 1080
+let cursors;
+
+let config = {
+    type: Phaser.WEBGL,
+    width: 800,
+    height: 600,
+    physics: {
+        default: 'arcade',
+        arcade: {
+            debug: true,
+            gravity: {
+                x:0,
+                y: 0
+            }
+        }
     },
-    type: Phaser.AUTO,
-    scene: [Intro, Level1, Level2, Level3, Summary, Credits],
-    title: "Physics Test",
-});
+    scene: [Intro, Level1]
+};
+
+let game = new Phaser.Game(config);
