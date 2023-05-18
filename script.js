@@ -22,7 +22,7 @@ class Level1 extends Phaser.Scene {
 
     preload() {
         this.load.image('dave', 'assets/dave.png')
-        this.load.image('arrowKey', 'assets/arrow-key.png')
+        this.load.image('arrowKeys', 'assets/arrow-keys.png')
         this.load.image('diamond', 'assets/diamond.png')
         // load tile map
     }
@@ -69,13 +69,9 @@ class Level1 extends Phaser.Scene {
         // this.physics.add.collider(this.dave, this.ground)
 
         // arrow keys ui
-        this.upKey = this.add.sprite(64, 32, 'arrowKey').setScale(0.06)
-		this.leftKey = this.add.sprite(32, 64, 'arrowKey').setScale(0.06)
-		this.downKey = this.add.sprite(64, 64, 'arrowKey').setScale(0.06)
-		this.rightKey = this.add.sprite(96, 64, 'arrowKey').setScale(0.06)
-		this.downKey.rotation = Math.PI/2*3
-		this.rightKey.rotation = Math.PI
-        this.upKey.rotation = Math.PI/2
+        this.add.sprite(65, 45, 'arrowKeys')
+            .setScale(0.25)
+            .setTint(0x000000)
     }
 
     update() {
@@ -89,8 +85,6 @@ class Level1 extends Phaser.Scene {
 
         else {
             this.dave.body.velocity.x = 0
-            this.leftKey.tint = 0xFFFFFF
-            this.rightKey.tint = 0xFFFFFF
         }
         
         if (this.dave.body.touching.down && Phaser.Input.Keyboard.JustDown(cursors.up)) {
@@ -150,8 +144,8 @@ class Summary extends Phaser.Scene {
         this.add.image(400, 300, 'background').setScale(0.575)
         this.add.text(game.config.width/3, 25, 'Level ' + `${this.level}`).setFontSize(50)
         this.add.text(game.config.width/3, 75, 'Summary').setFontSize(50)
-        this.add.text(game.config.width/3, 150, 'Time: ' + `${this.time}`).setFontSize(25)
-        this.add.text(game.config.width/3, 175, 'Score: ' + `${this.score}`).setFontSize(25)
+        this.add.text(game.config.width/3.5, 150, 'Time: ' + `${this.time}`).setFontSize(25)
+        this.add.text(game.config.width/3.5, 175, 'Score: ' + `${this.score}`).setFontSize(25)
     }
 }
 
