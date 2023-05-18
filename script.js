@@ -9,7 +9,7 @@ class Intro extends Phaser.Scene {
         \nmini platforming test!").setFontSize(25)
         this.add.text(50,100, "Click anywhere to begin.").setFontSize(20)
         this.input.on('pointerdown', () => {
-            this.time.delayedCall(1000, () => this.scene.start('level1'))
+            this.scene.start('level1')
         });
     }
 }
