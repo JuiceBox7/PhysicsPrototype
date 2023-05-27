@@ -115,11 +115,11 @@ class Level1 extends Phaser.Scene {
     }
 
     update() {
-        if (cursors.left.isDown) {
+        if (cursors.left.isDown || this.moveLeft) {
             this.dave.setVelocityX(-300)
         }
 
-        else if (cursors.right.isDown) {
+        else if (cursors.right.isDown || this.moveRight) {
             this.dave.setVelocityX(300)
         }
 
@@ -127,24 +127,9 @@ class Level1 extends Phaser.Scene {
             this.dave.body.velocity.x = 0
         }
         
-        if (this.dave.body.touching.down && Phaser.Input.Keyboard.JustDown(cursors.up)) {
+        if (this.dave.body.touching.down && (Phaser.Input.Keyboard.JustDown(cursors.up) || this.jumps)) {
             this.jump.play()
             this.dave.body.setVelocityY(-1000)
-        }
-
-        if (this.moveLeft) {
-            this.dave.setVelocityX(-300);
-        }
-        else if (this.moveRight) {
-            this.dave.setVelocityX(300);
-        }
-        else {
-            this.dave.body.velocity.x = 0;
-        }
-    
-        if (this.dave.body.touching.down && this.jumps) {
-            this.jump.play();
-            this.dave.body.setVelocityY(-1000);
         }
 
         this.physics.world.wrap(this.dave, this.dave.width/2)
@@ -261,11 +246,11 @@ class Level2 extends Phaser.Scene {
     }
 
     update() {
-        if (cursors.left.isDown) {
+        if (cursors.left.isDown || this.moveLeft) {
             this.dave.setVelocityX(-300)
         }
 
-        else if (cursors.right.isDown) {
+        else if (cursors.right.isDown || this.moveRight) {
             this.dave.setVelocityX(300)
         }
 
@@ -273,24 +258,9 @@ class Level2 extends Phaser.Scene {
             this.dave.body.velocity.x = 0
         }
         
-        if (this.dave.body.touching.down && Phaser.Input.Keyboard.JustDown(cursors.up)) {
+        if (this.dave.body.touching.down && (Phaser.Input.Keyboard.JustDown(cursors.up) || this.jumps)) {
             this.jump.play()
             this.dave.body.setVelocityY(-1000)
-        }
-
-        if (this.moveLeft) {
-            this.dave.setVelocityX(-300);
-        }
-        else if (this.moveRight) {
-            this.dave.setVelocityX(300);
-        }
-        else {
-            this.dave.body.velocity.x = 0;
-        }
-    
-        if (this.dave.body.touching.down && this.jumps) {
-            this.jump.play();
-            this.dave.body.setVelocityY(-1000);
         }
 
         this.physics.world.wrap(this.dave, this.dave.width/2)
@@ -414,12 +384,12 @@ class Level3 extends Phaser.Scene {
     }
 
     update() {
-        if (cursors.left.isDown) {
+        if (cursors.left.isDown || this.moveLeft) {
             this.dave.body.setAccelerationX(-500)
 
         }
 
-        else if (cursors.right.isDown) {
+        else if (cursors.right.isDown || this.moveRight) {
             this.dave.body.setAccelerationX(500)
         }
 
@@ -428,24 +398,9 @@ class Level3 extends Phaser.Scene {
             this.dave.body.setDragX(200)
         }
         
-        if (this.dave.body.touching.down && Phaser.Input.Keyboard.JustDown(cursors.up)) {
+        if (this.dave.body.touching.down && (Phaser.Input.Keyboard.JustDown(cursors.up) || this.jumps)) {
             this.jump.play()
             this.dave.body.setVelocityY(-1000)
-        }
-
-        if (this.moveLeft) {
-            this.dave.setVelocityX(-300);
-        }
-        else if (this.moveRight) {
-            this.dave.setVelocityX(300);
-        }
-        else {
-            this.dave.body.velocity.x = 0;
-        }
-    
-        if (this.dave.body.touching.down && this.jumps) {
-            this.jump.play();
-            this.dave.body.setVelocityY(-1000);
         }
 
         this.physics.world.wrap(this.dave, this.dave.width/2)
