@@ -433,9 +433,13 @@ class Credits extends Phaser.Scene {
 let cursors;
 
 let config = {
-    type: Phaser.WEBGL,
-    width: 1000,
-    height: 600,
+    scale: {
+        mode: Phaser.Scale.FIT,
+        autoCenter: Phaser.Scale.CENTER_BOTH,
+        width: 1000,
+        height: 600
+    },
+    type: Phaser.AUTO,
     physics: {
         default: 'arcade',
         arcade: {
