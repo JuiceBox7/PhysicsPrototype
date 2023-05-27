@@ -82,6 +82,18 @@ class Level1 extends Phaser.Scene {
 
         this.diamondCount = 0
 
+
+        let upButton = this.add.text(350, 135, '⬆️', {fontSize: '50px', fill: '0xFFFFFF' }).setInteractive();
+        let downButton = this.add.text(350, 180, '⬇️', {fontSize: '50px', fill: '0xFFFFFF' }).setInteractive();
+        let leftButton = this.add.text(300, 180, '⬅️', {fontSize: '50px', fill: '0xFFFFFF' }).setInteractive();
+        let rightButton = this.add.text(400, 180, '➡️', {fontSize: '50px', fill: '0xFFFFFF' }).setInteractive();
+        upButton.on('pointerdown', () => { this.jumps = true; });
+        upButton.on('pointerup', () => { this.jumps = false; });
+        leftButton.on('pointerdown', () => { this.moveLeft = true; });
+        leftButton.on('pointerup', () => { this.moveLeft = false; });
+        rightButton.on('pointerdown', () => { this.moveRight = true; });
+        rightButton.on('pointerup', () => { this.moveRight = false; });
+
         this.score = this.add.text(820, 25, 'Diamonds: ' + this.diamondCount, {
             fontSize: '20px',
             fill: 0xFFFFFF
@@ -118,6 +130,21 @@ class Level1 extends Phaser.Scene {
         if (this.dave.body.touching.down && Phaser.Input.Keyboard.JustDown(cursors.up)) {
             this.jump.play()
             this.dave.body.setVelocityY(-1000)
+        }
+
+        if (this.moveLeft) {
+            this.dave.setVelocityX(-300);
+        }
+        else if (this.moveRight) {
+            this.dave.setVelocityX(300);
+        }
+        else {
+            this.dave.body.velocity.x = 0;
+        }
+    
+        if (this.dave.body.touching.down && this.jumps) {
+            this.jump.play();
+            this.dave.body.setVelocityY(-1000);
         }
 
         this.physics.world.wrap(this.dave, this.dave.width/2)
@@ -200,6 +227,18 @@ class Level2 extends Phaser.Scene {
 
         this.diamondCount = 0
 
+        let upButton = this.add.text(350, 135, '⬆️', {fontSize: '50px', fill: '0xFFFFFF' }).setInteractive();
+        let downButton = this.add.text(350, 180, '⬇️', {fontSize: '50px', fill: '0xFFFFFF' }).setInteractive();
+        let leftButton = this.add.text(300, 180, '⬅️', {fontSize: '50px', fill: '0xFFFFFF' }).setInteractive();
+        let rightButton = this.add.text(400, 180, '➡️', {fontSize: '50px', fill: '0xFFFFFF' }).setInteractive();
+        upButton.on('pointerdown', () => { this.jumps = true; });
+        upButton.on('pointerup', () => { this.jumps = false; });
+        leftButton.on('pointerdown', () => { this.moveLeft = true; });
+        leftButton.on('pointerup', () => { this.moveLeft = false; });
+        rightButton.on('pointerdown', () => { this.moveRight = true; });
+        rightButton.on('pointerup', () => { this.moveRight = false; });
+
+
         this.score = this.add.text(820, 25, 'Diamonds: ' + this.diamondCount, {
             fontSize: '20px',
             fill: 0xFFFFFF
@@ -237,6 +276,21 @@ class Level2 extends Phaser.Scene {
         if (this.dave.body.touching.down && Phaser.Input.Keyboard.JustDown(cursors.up)) {
             this.jump.play()
             this.dave.body.setVelocityY(-1000)
+        }
+
+        if (this.moveLeft) {
+            this.dave.setVelocityX(-300);
+        }
+        else if (this.moveRight) {
+            this.dave.setVelocityX(300);
+        }
+        else {
+            this.dave.body.velocity.x = 0;
+        }
+    
+        if (this.dave.body.touching.down && this.jumps) {
+            this.jump.play();
+            this.dave.body.setVelocityY(-1000);
         }
 
         this.physics.world.wrap(this.dave, this.dave.width/2)
@@ -326,6 +380,17 @@ class Level3 extends Phaser.Scene {
 
         this.diamondCount = 0
 
+        let upButton = this.add.text(350, 135, '⬆️', {fontSize: '50px', fill: '0xFFFFFF' }).setInteractive();
+        let downButton = this.add.text(350, 180, '⬇️', {fontSize: '50px', fill: '0xFFFFFF' }).setInteractive();
+        let leftButton = this.add.text(300, 180, '⬅️', {fontSize: '50px', fill: '0xFFFFFF' }).setInteractive();
+        let rightButton = this.add.text(400, 180, '➡️', {fontSize: '50px', fill: '0xFFFFFF' }).setInteractive();
+        upButton.on('pointerdown', () => { this.jumps = true; });
+        upButton.on('pointerup', () => { this.jumps = false; });
+        leftButton.on('pointerdown', () => { this.moveLeft = true; });
+        leftButton.on('pointerup', () => { this.moveLeft = false; });
+        rightButton.on('pointerdown', () => { this.moveRight = true; });
+        rightButton.on('pointerup', () => { this.moveRight = false; });
+
         this.score = this.add.text(820, 25, 'Diamonds: ' + this.diamondCount, {
             fontSize: '20px',
             fill: 0xFFFFFF
@@ -366,6 +431,21 @@ class Level3 extends Phaser.Scene {
         if (this.dave.body.touching.down && Phaser.Input.Keyboard.JustDown(cursors.up)) {
             this.jump.play()
             this.dave.body.setVelocityY(-1000)
+        }
+
+        if (this.moveLeft) {
+            this.dave.setVelocityX(-300);
+        }
+        else if (this.moveRight) {
+            this.dave.setVelocityX(300);
+        }
+        else {
+            this.dave.body.velocity.x = 0;
+        }
+    
+        if (this.dave.body.touching.down && this.jumps) {
+            this.jump.play();
+            this.dave.body.setVelocityY(-1000);
         }
 
         this.physics.world.wrap(this.dave, this.dave.width/2)
